@@ -4,7 +4,7 @@ import numpy as np
 
 
 def bar_plot_for_categorical_feature(df, feature,nrows=1,ncols=1,index=1,sharex=None,sharey=None):
-    feature_df = pd.pivot_table(df, values='count', index=feature, columns='Survived',aggfunc='count', observed=False, fill_value=0).sort_index()
+    feature_df = pd.pivot_table(df, values='count', index=feature, columns='Survived',aggfunc='count', observed=False, fill_value=0, dropna = False).sort_index()
 
     feature_0 = feature_df[0]
     feature_1 = feature_df[1]
@@ -30,7 +30,7 @@ def bar_plot_for_categorical_feature(df, feature,nrows=1,ncols=1,index=1,sharex=
 
 
 def normalized_stacked_barplot_for_categorical_feature(df, feature,nrows=1,ncols=1,index=1,sharex=None,sharey=None):
-    feature_df = pd.pivot_table(df, values='count', index=feature, columns='Survived',aggfunc='count', observed=False, fill_value=0).sort_index()
+    feature_df = pd.pivot_table(df, values='count', index=feature, columns='Survived',aggfunc='count', observed=False, fill_value=0, dropna = False).sort_index()
 
     feature_0 = np.array(feature_df[0])
     feature_1 = np.array(feature_df[1])
