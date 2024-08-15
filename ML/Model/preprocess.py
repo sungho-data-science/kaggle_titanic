@@ -1,8 +1,6 @@
 import pandas as pd
 
-def preprocess(df, feature_list, target, PassengerId):
-    feature_list_train = feature_list + [target]
-    feature_list_test = feature_list + [PassengerId]
+def preprocess(df):
 
     # generate a feature called "last_name" from "Name"
     df["last_name"] = df["Name"].apply(lambda x: x.split(',')[0].strip())
@@ -45,7 +43,7 @@ def preprocess(df, feature_list, target, PassengerId):
 
 
     # relatives from SibSp & Parch
-    df["relatives"] = df["SibSp"] + df["Parch"]
+    df["relatives"] = df["SibSp"] + df["Parch"] + 1
     print("'relative' feature is created")
 
     # alone from SibSp & Parch
@@ -93,9 +91,4 @@ def preprocess(df, feature_list, target, PassengerId):
     df["Survived"]=df["Survived"].astype('Int64', errors='ignore')
     print("dtype of Survived has been changed to int")
 
-    print("\n\n print dtypes")
-    print(df[feature_list_train].dtypes)
-    
-    train_df = df.loc[df["train_test"]=="train",feature_list_train]
-    test_df = df.loc[df["train_test"]=="test",feature_list_test]
-    return train_df, test_df
+    return df
